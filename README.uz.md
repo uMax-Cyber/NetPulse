@@ -1,48 +1,55 @@
 <div align="center">
 
-**🇬🇧 [English](README.md) · 🇷🇺 [Русский](README.ru.md) · 🇺🇿 [Oʻzbekcha](README.uz.md)**
+[![English](https://img.shields.io/badge/README-English-blue)](README.md)
+[![Русский](https://img.shields.io/badge/README-Русский-red)](README.ru.md)
+[![Oʻzbekcha](https://img.shields.io/badge/README-Oʻzbekcha-green)](README.uz.md)
 
 </div>
 
 # NetPulse — Wi-Fi va Tarmoq Diagnostikasi
 
-Productionda Wi-Fi muammolarini tashxislash metodologiyasi: DHCP pool tugashidan sticky clientlargacha.
+# NetPulse — Wi-Fi va tarmoq diagnostikasi
 
-## Falsafa: umumiydan xususiyga
+Wi-Fi muammolarini bosqichma-bosqich aniqlash metodologiyasi: DHCP pool tugashidan boshlab, qoplama muammolarigacha.
 
-**Hech qachon wireshark bilan boshlamang.** Diagnostika zinapoyasi:
-1. **Scope** — kim/nima/qayerda/qachon (SSID, VLAN, qurilmalar)
-2. **Passiv metrikalar** — RSSI, retry, kanal yuklamasi
-3. **DHCP yo'li** — pool hajmi vs utilizatsiya
-4. **Vaqt korrelyatsiyasi** — konfig (doimiy) vs yuklama (piklar)
-5. **Aniq capture** — endigina, aniq nuqtada
+## Tamoyil: umumiydan xususiyga
 
-## Asosiy kashfiyot: DHCP pool tugashi (BIRINCHI tekshirish)
+**Wireshark bilan boshlamang.** Avval quyidagi tartibda tekshiring:
+1. **Doira** — qaysi SSID, VLAN, qurilmalar taʼsirlangan
+2. **Passiv koʻrsatkichlar** — RSSI, retry, kanal yuklamasi
+3. **DHCP yoʻli** — pool hajmi va band qilingan IP soni
+4. **Vaqt bogʻliqligi** — konfiguratsiya (doimiy) yoki yuklama (pik soatlar)
+5. **Aniq nuqtada capture** — faqat shu bosqichdan keyin
 
-**Simptom**: yangi qurilmalar «ulanish...» da qotadi, mavjudlari ishlaydi.
-**Tekshirish**: noyob IP soni vs pool hajmi.
+## Eng muhim tekshiruv: DHCP pool (birinchi navbatda!)
+
+**Belgi**: yangi qurilmalar «ulanmoqda...» da qolib ketadi, lekin mavjud qurilmalar ishlaydi.
 
 ```bash
-grep "DHCP Server" /var/log/dhcp.log | \
-  grep -oE 'reported_ip="10\.X\.Y\.[0-9]+"' | sort -u | wc -l
+grep "DHCP Server" /var/log/dhcp.log | \\
+  grep -oE "reported_ip=\\"10\\\\.X\\\\.Y\\\\.[0-9]+\\"" | sort -u | wc -l
 ```
 
-## Real holatlar
+## Real hayotdan misollar
 
-| Simptom | Sabab | Yechim |
-|---------|-------|--------|
-| Yangi qurilmalar «ulanish...» | DHCP pool tugagan (459/455) | Poolni ×2 kengaytirish |
-| 1-qavat klienti 3-qavat APda | Min RSSi kick yo'q | -75dBm o'rnatish |
-| IP + link bor, paket yurmaydi | 58k retransmission | 5 GHz yoqish |
+| Belgi | Sabab | Yechim |
+|-------|-------|--------|
+| Yangi qurilmalar ulanmaydi | DHCP pool toʻlgan (459/455) | Poolni ikki barobar kengaytirish |
+| 1-qavat qurilmasi 3-qavat APga ulangan | Min RSSI belgilanmagan | -75dBm chegara qoʻyish |
+| IP bor, lekin trafik yurmaydi | 58 ming qayta uzatish | 5 GHz yoqish |
+
 
 ## 📬 Aloqa
 
-Savollar bormi? Yozing: **[allumaxmail@gmail.com](mailto:allumaxmail@gmail.com)**
+Savollaringiz bormi? Yozing: **[allumaxmail@gmail.com](mailto:allumaxmail@gmail.com)**
 
 ---
 
 <div align="center">
 
-**🇬🇧 [English](README.md) · 🇷🇺 [Русский](README.ru.md) · 🇺🇿 [Oʻzbekcha](README.uz.md)**
+[![English](https://img.shields.io/badge/README-English-blue)](README.md)
+[![Русский](https://img.shields.io/badge/README-Русский-red)](README.ru.md)
+[![Oʻzbekcha](https://img.shields.io/badge/README-Oʻzbekcha-green)](README.uz.md)
 
 </div>
+

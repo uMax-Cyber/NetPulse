@@ -1,6 +1,8 @@
 [English](README.md) | [Русский](README.ru.md)
 
 # Wi-Fi & Network Diagnostics Toolkit
+
+![Demo](screenshots/demo.svg)
 [![CI](https://github.com/uMax-Cyber/NetPulse/actions/workflows/ci.yml/badge.svg)](https://github.com/uMax-Cyber/NetPulse/actions/workflows/ci.yml)
 
 Structured methodology for diagnosing Wi-Fi problems in production: from DHCP pool exhaustion to sticky clients, RF congestion to dead spots. Includes topology mapping, DHCP lease analysis, and roaming quality assessment.

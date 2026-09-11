@@ -1,4 +1,8 @@
-[English](README.md) | **Русский**
+<div align="center">
+
+**🇬🇧 [English](README.md) · 🇷🇺 [Русский](README.ru.md) · 🇺🇿 [Oʻzbekcha](README.uz.md)**
+
+</div>
 
 # NetPulse — Диагностика Wi-Fi и сети
 

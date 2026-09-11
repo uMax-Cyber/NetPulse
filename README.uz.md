@@ -11,21 +11,21 @@
 ![Demo](screenshots/demo.svg)
 [![CI](https://github.com/uMax-Cyber/NetPulse/actions/workflows/ci.yml/badge.svg)](https://github.com/uMax-Cyber/NetPulse/actions/workflows/ci.yml)
 
-Production muhitida Wi-Fi muammolarini tashxislashning tizimli metodologiyasi: DHCP pool tugashidan «yopishqoq» (sticky) klientlargacha, RF tiqilinchidan oʻlik zonalargacha. Topologiya xaritasini chizish, DHCP ijaralarini (lease) tahlil qilish va roaming sifatini baholashni oʻz ichiga oladi.
+Production muhitidagi Wi-Fi muammolarini tizimli tashxislash metodologiyasi: DHCP pool tugashidan «yopishqoq» (sticky) klientlargacha, kanal tiqilinchidan oʻlik zonalargacha. Topologiya xaritasini chizish, DHCP lease tahlili va roaming sifatini baholash ham shu jumlaga kiradi.
 
 ## Tamoyil: umumiydan xususiyga
 
-**Hech qachon wireshark bilan boshlamang.** Diagnostika zinapoyasiga amal qiling:
-1. **Koʻlam** — kim/nima/qayerda/qachon (qaysi SSID, VLAN, qurilmalar)
-2. **Passiv koʻrsatkichlar** — RSSI, qayta uzatish ulushi, kanal yuklamasi, qoniqish darajasi
-3. **DHCP yoʻli** — pool hajmi va band qilinganlik, lease hodisalari, relay yoʻli
-4. **Vaqt boʻyicha bogʻliqlik** — doimiy (konfiguratsiya) yoki pik soatlarda (yuklama)
-5. **Nishonga yoʻnaltirilgan capture** — faqat shu bosqichda, faqat anomaliyaning aniq nuqtasida
+**Hech qachon ishni wireshark bilan boshlamang.** Tashxislashni quyidagi tartibda olib boring:
+1. **Koʻlam** — kim, nima, qayerda, qachon (qaysi SSID, VLAN, qurilmalar)
+2. **Passiv koʻrsatkichlar** — RSSI, retry ulushi, kanal yuklamasi, foydalanuvchi qoniqishi
+3. **DHCP yoʻli** — pool hajmi va band qilinganlik, lease hodisalari, relay zanjiri
+4. **Vaqt boʻyicha tahlil** — muammo doimiy kuzatilsa konfiguratsiya, pik soatlarda boʻlsa yuklama
+5. **Capture** — faqat shu nuqtadan keyin, faqat anomaliya roʻy bergan joyda olinadi
 
-## Asosiy kashfiyot: DHCP pool tugashi (birinchi navbatda tekshiring)
+## Eng muhim topilma: DHCP pool tugishi (avval shuni tekshiring)
 
-**Belgi**: yangi qurilmalar «ulanmoqda...» da qolib ketadi, mavjud qurilmalar esa odatdagidek ishlaydi.
-**Tekshirish**: berilgan noyob IP lar soni va pool sigʻimini solishtirish.
+**Belgisi:** yangi qurilmalar «ulanmoqda...» da qotib qoladi, eski qurilmalar esa odatdagidek ishlaydi.
+**Tekshirish:** berilgan noyob IP lar soni bilan pool sigʻimini solishtiring.
 
 ```bash
 # DHCP jurnalidagi noyob IP larni sanash
@@ -34,33 +34,33 @@ grep "DHCP Server" /var/log/dhcp.log | \
 # Pool hajmi bilan solishtiring
 ```
 
-**Nega e'tibordan chetda qoladi**: «sim orqali hammasi ishlaydi» DHCP muammosini istisno etmaydi — har xil VLAN da alohida poolar bor.
+**Nega koʻpincha payqalmaydi:** «sim orqali hammasi yaxshi» degan xulosa DHCP muammosini istisno etmaydi — har bir VLAN ning DHCP pooli alohida.
 
 ## Skriptlar
 
 | Skript | Vazifasi |
 |--------|----------|
-| `scripts/dhcp_pool_check.py` | Berilgan IP lar va pool sigʻimini solishtirish |
-| `scripts/topology_map.py` | Kontroller API sidan svitch/AP/klient daraxtini qurish |
-| `scripts/roam_quality.py` | Roaming hodisalarini tahlil qilish (yomon roaming = ikkala tomon < -75dBm) |
+| `scripts/dhcp_pool_check.py` | Berilgan IP lar sonini pool sigʻimi bilan solishtirish |
+| `scripts/topology_map.py` | Kontroller API sidan svitch/AP/klient daraxtini chizish |
+| `scripts/roam_quality.py` | Roaming hodisalarini tahlil qilish (yomon roaming — ikkala tomon ham −75dBm dan past) |
 | `scripts/port_audit.py` | Svitch portlarining toʻliq inventarizatsiyasi (VLAN, PoE, xatolar, flaplar) |
 
 ## Hal qilingan real keyslar
 
 ### Keys 1: Wi-Fi da «ulanmoqda...»
-Asosiy sabab: DHCP pool tugagan (455 manzilli poolga 459 noyob IP). Pool ×2 kengaytirib hal qilingan.
+Sabab: DHCP pool tugagan — 455 manzilli poolga 459 noyob IP berilgan. Poolni ikki baravar kengaytirish bilan hal qilingan.
 
-### Keys 2: 1-qavatdagi klient 3-qavatdagi AP ga ulangan
-Asosiy sabab: min RSSI kick sozlanmagan. Klient beton devorlar orqali uzoqdagi AP ga -82dBm signal bilan yopishib olgan. 58 ming qayta uzatish. Min RSSI ni -75/-80dBm ga belgilab hal qilingan.
+### Keys 2: 1-qavatdagi qurilma 3-qavatdagi AP ga ulangan
+Sabab: min RSSI kick sozlanmagan. Klient beton devorlar ortidagi uzoq AP ga −82dBm signal bilan baribir yopishib turadi — natijada 58 ming qayta uzatish. Min RSSI ni −75/−80dBm qilib belgilash bilan hal qilingan.
 
-### Keys 3: Oʻlik zonalar (IP + link yaxshi, paketlar yurmaydi)
-Asosiy sabab: efirning tiqilishi — 2.4GHz ning 3 kanalida 627 klient. Katta qayta uzatish boʻronlari (eng yomoni: bitta klientda 58 106 qayta uzatish). 5GHz ni yoqib hal qilingan (gateway VM larida RAM yangilagandan keyin).
+### Keys 3: Oʻlik zonalar (IP va link bor, paket yurmaydi)
+Sabab: efir toʻlgan — 2.4GHz ning atigi 3 kanalida 627 klient. Katta retry boʻronlari kelib chiqqan (eng ogʻiri: bitta klientda 58 106 retry). Yechim: 5GHz ni yoqish (gateway VM lariga RAM qoʻshilgandan keyin amalga oshirildi).
 
 ## Texnologiyalar
 - UniFi Controller API (legacy REST)
 - Sophos Firewall XML API
 - Python (faqat standart kutubxona)
-- Markazlashtirilgan jurnal uchun rsyslog
+- Markazlashtirilgan log uchun rsyslog
 
 ## Litsenziya
 MIT

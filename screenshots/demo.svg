@@ -1,0 +1,16 @@
+<svg width="800" height="380" xmlns="http://www.w3.org/2000/svg">
+<rect width="800" height="380" fill="#1e1e2e" rx="8"/>
+<rect width="800" height="30" fill="#181825" rx="8"/>
+<circle cx="20" cy="15" r="6" fill="#f38ba8"/><circle cx="40" cy="15" r="6" fill="#f9e2af"/><circle cx="60" cy="15" r="6" fill="#a6e3a1"/>
+<text x="400" y="20" text-anchor="middle" fill="#cdd6f4" font-family="monospace" font-size="12">dhcp_pool_check.py + roam_quality.py</text>
+<text x="15" y="55" fill="#a6e3a1" font-family="monospace" font-size="13">$ python3 scripts/dhcp_pool_check.py /var/log/dhcp.log</text>
+<text x="15" y="85" fill="#89b4fa" font-family="monospace" font-size="14">Pool: 10.0.1.50-10.0.1.250 (201 addresses)</text>
+<text x="15" y="110" fill="#cdd6f4" font-family="monospace" font-size="14">Unique IPs issued: 199 | Utilization: 99.0%</text>
+<text x="15" y="140" fill="#f38ba8" font-family="monospace" font-size="15" font-weight="bold">🔴 ALERT: POOL EXHAUSTED!</text>
+<text x="15" y="175" fill="#a6e3a1" font-family="monospace" font-size="13">$ python3 scripts/roam_quality.py /var/log/wifi.log</text>
+<text x="15" y="205" fill="#cdd6f4" font-family="monospace" font-size="14">Total roams: 6696</text>
+<text x="15" y="230" fill="#f38ba8" font-family="monospace" font-size="14">Bad roams (both&lt;-75dBm): 583 (8.7%)</text>
+<text x="15" y="260" fill="#f9e2af" font-family="monospace" font-size="13">🔴 CRITICAL: sticky clients confirmed</text>
+<text x="15" y="290" fill="#89b4fa" font-family="monospace" font-size="13">Recommendation: enable min RSSI kick at -75dBm</text>
+<text x="15" y="320" fill="#89b4fa" font-family="monospace" font-size="13">              expand DHCP pool ×2</text>
+</svg>

@@ -1,3 +1,5 @@
+[English](README.md) | [Русский](README.ru.md)
+
 # Wi-Fi & Network Diagnostics Toolkit
 [![CI](https://github.com/uMax-Cyber/NetPulse/actions/workflows/ci.yml/badge.svg)](https://github.com/uMax-Cyber/NetPulse/actions/workflows/ci.yml)
 

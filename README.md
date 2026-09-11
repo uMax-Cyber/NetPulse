@@ -62,3 +62,15 @@ Root cause: Airtime congestion — 627 clients on 3 channels of 2.4GHz. Massive 
 
 ## License
 MIT
+
+## 📬 Contact
+
+Questions? Reach out: **[allumaxmail@gmail.com](mailto:allumaxmail@gmail.com)**
+
+---
+
+<div align="center">
+
+**🇬🇧 [English](README.md) · 🇷🇺 [Русский](README.ru.md) · 🇺🇿 [Oʻzbekcha](README.uz.md)**
+
+</div>
